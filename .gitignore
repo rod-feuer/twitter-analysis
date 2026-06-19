@@ -1,0 +1,8 @@
+.env
+.venv/
+bookmarks/
+state.json
+__pycache__/
+*.egg-info/
+*.pyc
+.DS_Store

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "twitter-analysis"
+version = "0.1.0"
+description = "Pull X/Twitter bookmarks (including Articles) to a local Markdown+JSON corpus for LLM analysis."
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31",
+    "requests-oauthlib>=2.0",
+    "python-dotenv>=1.0",
+    "rich>=13.7",
+    "anthropic>=0.40",
+]
+
+[project.scripts]
+twitter-analysis = "twitter_analysis.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["src"]

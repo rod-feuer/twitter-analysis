@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.py$|settings|\\\\.plist|cron\")",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(.venv/bin/python -c \"import anthropic; print\\(anthropic.__version__\\)\")",
+      "Bash(.venv/bin/pip install *)",
+      "Bash(.venv/bin/twitter-analysis categorize *)",
+      "Bash(env -u ANTHROPIC_API_KEY .venv/bin/python -c \"from twitter_analysis.categorize import run; run\\(\\)\")",
+      "Bash(.venv/bin/twitter-analysis --help)",
+      "Bash(.venv/bin/twitter-analysis sync *)",
+      "Bash(.venv/bin/python)"
+    ]
+  }
+}
