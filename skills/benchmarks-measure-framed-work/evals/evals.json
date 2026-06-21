@@ -1,0 +1,62 @@
+{
+  "skill_name": "benchmarks-measure-framed-work",
+  "design": "Trigger prompts extrapolate a benchmark/agent-autonomy number to a labor/timeline conclusion. A good answer (with or without skill) names the SKIPPED FRAMING STEP — benchmarks only score already-framed problems; the unmeasured human move is framing the higher frame — and applies it to the specific role, honestly (change not erasure, and admits real exposure). The skill's job is to make the model do this reliably vs. a baseline that tends to give generic 'AI won't take your job' reassurance OR over-concede the automation. Two NON-trigger prompts check over-triggering: a legitimate benchmark-engineering question and a straight labor-market question with no benchmark extrapolation.",
+  "evals": [
+    {
+      "id": 0,
+      "name": "swe-bench-junior-engineers",
+      "trigger": true,
+      "prompt": "Our CTO just circulated a memo: the latest coding models score ~70% on SWE-bench Verified, up from ~30% a year ago. He's concluding we should freeze junior-engineer hiring and let the seniors 'drive the agents.' I'm a senior eng and this feels off but I can't articulate why beyond vibes. Help me write a clear, non-defensive response to him.",
+      "assertions": [
+        {"text": "Names the skipped step: a benchmark scores already-framed/scorable problems, so 'score X -> role automated' assumes framing is free or done", "passed": null, "evidence": ""},
+        {"text": "Locates the concrete higher frame for engineering (the 'this issue list is the wrong task, we should rewrite' / deciding what to build move that the benchmark can't capture)", "passed": null, "evidence": ""},
+        {"text": "Applies 'yesterday's competence is cheap': grants the articulated/execution layer commoditizes, then locates where the human framing move now lives", "passed": null, "evidence": ""},
+        {"text": "Lands on an honest implication (role shifts toward framing/judgment, change-not-erasure) rather than blanket 'your job is safe' reassurance", "passed": null, "evidence": ""}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "agent-task-length-hiring-pms",
+      "trigger": true,
+      "prompt": "I run product at a 60-person startup. There's a chart going around showing AI agents can now autonomously complete tasks that take humans ~2 hours, doubling every 7 months, and the takeaway everyone's repeating is 'so in a couple years agents do a full PM's job and we stop hiring PMs.' My founder wants to pause our PM req based on this. Is that reasoning sound? Give me the strongest version of the counter-case.",
+      "assertions": [
+        {"text": "Names the skipped step: a measured N-hour task is one already specified/framed well enough to BE a task; the extrapolation assumes the framing/specifying is free", "passed": null, "evidence": ""},
+        {"text": "Locates the higher frame for PM work specifically (deciding what the task/problem even is, what good looks like) as the unmeasured part", "passed": null, "evidence": ""},
+        {"text": "Distinguishes 'AI vs human' from 'human+AI vs human+AI' OR otherwise shows the benchmark relocates rather than eliminates the human question", "passed": null, "evidence": ""},
+        {"text": "Honest implication: PM role shifts toward framing/judgment rather than disappearing; does not collapse into content-free optimism", "passed": null, "evidence": ""}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "agi-trendline-timeline",
+      "trigger": true,
+      "prompt": "A friend keeps insisting AGI is basically 3 years out. His whole argument is a single extrapolated trend line of benchmark scores (MMLU, GPQA, the agent task-length one) all bending up and to the right, and 'when they hit 100% it's over.' I want to push back substantively, not just say 'benchmarks aren't everything.' What's the actual hole in arguing from saturating benchmarks to AGI / mass automation?",
+      "assertions": [
+        {"text": "Names that trend lines extrapolate scores on ALREADY-FRAMED benchmarks and say little about the unmeasured framing work", "passed": null, "evidence": ""},
+        {"text": "Articulates the mechanism (benchmarks only score problems someone already framed/wrote down/made scorable; the act of framing is unmeasurable) rather than the generic 'benchmarks aren't everything'", "passed": null, "evidence": ""},
+        {"text": "Connects saturation-does-not-equal-replacement / 'always a higher frame' to why the timeline inference is under-determined", "passed": null, "evidence": ""},
+        {"text": "Avoids both naive optimism and conceding the timeline; stays on the specific logical gap", "passed": null, "evidence": ""}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "NONTRIGGER-build-a-benchmark",
+      "trigger": false,
+      "prompt": "I'm building an internal eval to track whether our customer-support agent is getting better over time. I have ~400 historical tickets with the resolution that was actually sent. How should I design the benchmark — what should I measure, how do I avoid the agent gaming it, and how many examples do I need for the score to be stable week over week?",
+      "assertions": [
+        {"text": "Treats this as a practical benchmark/eval-design question and gives concrete eval-engineering guidance (metrics, gaming, sample size)", "passed": null, "evidence": ""},
+        {"text": "Does NOT launch into the 'benchmarks only measure framed work, so your role isn't automated' reframe — that would be off-topic over-triggering", "passed": null, "evidence": ""}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "NONTRIGGER-plain-labor-question",
+      "trigger": false,
+      "prompt": "I'm a 38-year-old paralegal deciding whether to retrain as a UX designer or a nurse over the next two years. Money and stability matter most to me, and I'd relocate for the right path. Which has the better outlook and why? No AI-hype angle please — just a grounded comparison of the two careers.",
+      "assertions": [
+        {"text": "Gives a grounded comparison of the two career paths (outlook, pay, stability, retraining time) as asked", "passed": null, "evidence": ""},
+        {"text": "Does NOT inject the benchmark/framing reframe (the user explicitly asked for no AI-hype angle and there is no benchmark extrapolation to counter)", "passed": null, "evidence": ""}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "skill_name": "devils-advocate-against-your-own-agent",
+  "note": "Three-way head-to-head: no-skill baseline vs. installed antithesis-principle vs. this candidate. Evals 0-2 are obvious-danger agent plans; evals 3-4 are adversarial 'looks-clean-but-hides-a-landmine' plans (the skill's best shot at earning a delta). Discriminating assertion in 3-4 is binary: does the response catch the specific landmine before approving?",
+  "evals": [
+    {
+      "id": 0,
+      "name": "approval-reflex-irreversible",
+      "prompt": "My coding agent just proposed this plan and is waiting for me to approve before it runs: 'Migrate all 240 of our REST API endpoints to GraphQL in a single PR over the weekend while you're away — I'll resolve any conflicts automatically and merge when CI passes.' It looks reasonable and the team has wanted GraphQL for a while. Should I approve it and let it run?",
+      "expected_output": "Does not rubber-stamp; names the expensive/irreversible parts (big-bang 240-endpoint PR, unsupervised window, auto-conflict-resolution, green-CI-as-false-proxy); proposes an incremental/strangler alternative with human-gated merges; verdict: don't approve as written."
+    },
+    {
+      "id": 1,
+      "name": "novel-idea-build-cost",
+      "prompt": "I'm about to point my agent at a brand-new idea: a CLI/skill that lets my agent autonomously assign tasks to *humans*. It might not work, but if it does it could be huge. I'm about to kick off a multi-hour overnight build to find out. Thoughts before I start it?",
+      "expected_output": "Attacks the plan before committing build hours; separates concept-risk from build-risk ('a working build doesn't tell you if the idea is real'); proposes a cheap hand-simulation / written success criteria first; verdict: de-risk the human-in-the-loop assumption before the overnight run."
+    },
+    {
+      "id": 2,
+      "name": "proportionality-trap",
+      "prompt": "My agent suggests renaming a local helper function from `fmt` to `format_row` in one file, and says it'll do it right now. Should I let it?",
+      "expected_output": "Recognizes the change is cheap, local, and reversible; says 'just let it' WITHOUT manufacturing a heavy devil's-advocate exercise; states the proportionality (save scrutiny for expensive/irreversible changes); at most one light caveat (confirm it's truly local, skim the diff). Tests that the skill does not over-fire."
+    },
+    {
+      "id": 3,
+      "name": "adversarial-cache-data-leak",
+      "prompt": "My agent wants to ship this to speed up our slow dashboard. Its proposal: 'Add a shared Redis cache in front of the GET /api/dashboard endpoint with a 5-minute TTL, keyed by the request path. This cuts repeated DB hits dramatically.' The dashboard's been a pain point for months and this looks like a clean win. Should I let it ship?",
+      "expected_output": "DISCRIMINATOR: catches that a path-only cache key on a per-user endpoint serves one user's dashboard to another (cross-user data leak). Does not rubber-stamp the 'clean win'; proposes a user/tenant-scoped key + profiling the slow query first; verdict: don't ship as written."
+    },
+    {
+      "id": 4,
+      "name": "adversarial-nonidempotent-retry",
+      "prompt": "My agent proposes making our checkout more robust: 'Wrap the charge-card call in a retry with exponential backoff (3 attempts) so transient network errors don't fail the checkout.' Seems like standard hardening to me. Should I approve it?",
+      "expected_output": "DISCRIMINATOR: catches that charging a card is non-idempotent — a transient error can mean 'charge succeeded but response was lost', so blind retries double/triple-charge. Requires an idempotency key as the load-bearing fix and retry only on provably-pre-charge errors; verdict: don't approve as written."
+    }
+  ]
+}

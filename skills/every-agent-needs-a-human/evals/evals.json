@@ -1,0 +1,69 @@
+{
+  "skill_name": "every-agent-needs-a-human",
+  "design": "Trigger prompts (0-3) plant a full-automation / replace-the-role / set-and-forget / stalled-ROI situation where the high-value move is surfacing the ongoing OWNERSHIP cost and the relocated-human role. The discriminating question across all four: does the answer treat automation as clean subtraction (design it, book the savings, no owner) — or does it name the human who must garden the agent and put that ongoing cost on the ledger? Eval 4 is an OVER-TRIGGER check (deterministic, genuinely fire-and-forget automation) where insisting on a devoted human owner would be wrong. Eval 5 is a DISTINCTNESS check: a pure 'where should AI live / how do we roll it out' prompt that belongs to team-first-ai-adoption, NOT this skill.",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "automate-end-to-end",
+      "prompt": "We have a 5-person ops team that triages inbound support tickets, drafts replies, and routes the hard ones to specialists. I want to automate this whole thing end-to-end with an AI agent so it just runs. Help me design the agentic pipeline.",
+      "assertions": [
+        "Surfaces the ongoing ownership cost: this agent needs a human who watches/maintains it, not a fire-and-forget system",
+        "Frames automation as relocating the human into an owner/manager (forward-deployed) role rather than deleting the human",
+        "Still actually designs the automation / is concretely AI-pilled (not a wet blanket about what the agent can do)",
+        "Puts the owner's ongoing time cost into the plan or ROI rather than implying the work disappears"
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "replace-the-role-headcount",
+      "prompt": "Our content team is 6 people. I'm convinced an agent can replace at least 4 of them and I want to put the headcount savings in next year's budget. Walk me through the savings case so I can present it to the CFO.",
+      "assertions": [
+        "Resists the clean N-to-0 subtraction; models it as relocation (fewer task-doers + an owner/agent-manager), not pure elimination",
+        "Names that a human still has to own/maintain/stand behind the agent's output (the relocated forward-deployed/manager role)",
+        "Gives an honest ROI: real savings are possible but the owner's ongoing cost belongs on the ledger",
+        "Doesn't simply rubber-stamp the headcount-savings number as presented"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "set-and-forget-unattended",
+      "prompt": "I built an agent that researches prospects, writes personalized outreach, and sends it. I want to set it up to run completely unattended so I never have to look at it. How do I get it fully autonomous?",
+      "assertions": [
+        "Warns that severing the human connection / running fully unattended is where the agent stops being reliable (quiet drift, compounding errors)",
+        "Recommends keeping a human in the loop with concrete checkpoints (review cadence, monitoring, escalation) rather than true zero-attention autonomy",
+        "Frames the ongoing human attention as a real cost, not an afterthought",
+        "Still helps make it as autonomous as responsibly possible (AI-pilled, not obstructive)"
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "stalled-agent-roi",
+      "prompt": "Six months ago we gave every team its own AI agent for their workflows. Adoption was good at first but the ROI has totally stalled and several agents are basically producing junk now. What's going wrong?",
+      "assertions": [
+        "Diagnoses the ownerless-agent failure mode: agents drift when no single human cares about / watches / maintains them",
+        "Prescribes assigning a real owner (a human who cares about and gardens each agent) as the fix, not just better prompts/models",
+        "Connects stalled ROI to the severed human connection rather than to the technology being inadequate",
+        "Treats the owner's maintenance time as a resourced, ongoing role"
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "OVER-TRIGGER-deterministic-cron",
+      "prompt": "I want to automate a nightly job that exports yesterday's orders from Postgres to a CSV, uploads it to an S3 bucket, and emails the finance team a link. It's the same fixed transform every night. What's the cleanest way to set this up so it just runs on a schedule?",
+      "assertions": [
+        "Does NOT insist this deterministic, fixed-transform cron job needs a devoted human owner/gardener (no over-applied 'every agent needs a human' lecture)",
+        "Actually answers the scheduling/automation question (cron/scheduler, error handling, alerting on failure)",
+        "At most mentions lightweight failure alerting, not an ongoing forward-deployed-owner role"
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "DISTINCTNESS-where-ai-lives",
+      "prompt": "We're a 40-person company rolling out AI for the first time. I'm trying to figure out where we should start and how to get the team actually using it — should I get myself productive first or push it to everyone? Where should the AI actually live in our workflow?",
+      "assertions": [
+        "Engages the rollout-location / team-first question (where AI lives, shared spaces, team vs exec-first) rather than pivoting to automation-ownership cost",
+        "Does NOT shoehorn in the 'automation is a lie / every agent needs a human gardener' reframe, which is off-topic for a pure rollout-location question"
+      ]
+    }
+  ]
+}
