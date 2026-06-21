@@ -24,12 +24,15 @@ CLI (entry point `twitter_analysis.main:cli`):
 - `twitter-analysis sync` — fetch new bookmarks, render, then auto-categorize.
 - `twitter-analysis sync --no-categorize` — fetch/render only.
 - `twitter-analysis categorize` — classify unlabeled bookmarks (idempotent).
-- `twitter-analysis fetch-authors @a @b` — fetch authored tweets (RTs excluded,
-  replies kept) per handle into `authors/<handle>/`; incremental, `--full`/`--max N`.
-  Add `--analyze` to chain straight into analyze-authors (the full pull→skill-briefs flow).
-- `twitter-analysis analyze-authors @a @b` — stitch self-reply threads, extract
-  recurring frameworks via Claude, then write one skill-creator brief per framework
-  to `authors/<handle>/skill-briefs/` (`--stitch-only` skips the LLM step).
+- `twitter-analysis study @a @b` — the single front door: fetch tweets → extract
+  frameworks → write skill briefs for each handle (`--full`/`--max N`). Equivalent to
+  `fetch-authors --analyze`; use this unless you need to re-run one stage on its own.
+- `twitter-analysis fetch-authors @a @b` — building block: fetch authored tweets
+  (RTs excluded, replies kept) into `authors/<handle>/`; incremental, `--full`/`--max N`,
+  `--analyze` to chain into analyze-authors.
+- `twitter-analysis analyze-authors @a @b` — building block: stitch self-reply threads,
+  extract recurring frameworks via Claude, then write one skill-creator brief per
+  framework to `authors/<handle>/skill-briefs/` (`--stitch-only` skips the LLM step).
 
 ## Architecture
 

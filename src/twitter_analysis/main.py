@@ -162,6 +162,17 @@ def cli() -> int:
         help="After fetching, run analyze-authors (stitch threads, extract frameworks, write skill briefs)",
     )
 
+    study = sub.add_parser(
+        "study",
+        help="Full pipeline for given handles: fetch tweets → extract frameworks → write skill briefs",
+    )
+    study.add_argument("handles", nargs="+", help="X handles, e.g. @hnshah @pmarca")
+    study.add_argument("--full", action="store_true", help="Ignore saved cursors and refetch all")
+    study.add_argument(
+        "--max", type=int, default=None, dest="max_tweets",
+        help="Cap tweets pulled per author (default: up to the X depth wall, ~800 on this tier)",
+    )
+
     analyze = sub.add_parser(
         "analyze-authors",
         help="Stitch threads and extract recurring frameworks for given handles",
@@ -188,11 +199,11 @@ def cli() -> int:
         except Exception as exc:  # noqa: BLE001
             console.print(f"[red]Error:[/red] {exc}")
             return 1
-    if args.cmd == "fetch-authors":
+    if args.cmd in ("fetch-authors", "study"):
         try:
             return _cmd_fetch_authors(
                 handles=args.handles, full=args.full, max_tweets=args.max_tweets,
-                analyze=args.analyze,
+                analyze=args.cmd == "study" or args.analyze,
             )
         except Exception as exc:  # noqa: BLE001
             console.print(f"[red]Error:[/red] {exc}")
