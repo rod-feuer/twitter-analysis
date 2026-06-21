@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -129,6 +130,73 @@ def _analysis_markdown(handle: str, result: dict[str, Any]) -> str:
     return "\n".join(parts)
 
 
+def _slugify(name: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+    return slug or "framework"
+
+
+def _tweet_text(handle: str, tweet_id: str) -> str | None:
+    """Return a tweet's best text from its saved JSON, or None if not in the corpus."""
+    path = AUTHORS_DIR / handle / f"{tweet_id}.json"
+    if not path.exists():
+        return None
+    try:
+        rec = json.loads(path.read_text())
+    except (json.JSONDecodeError, OSError):
+        return None
+    return ((rec.get("note_tweet") or {}).get("text") or rec.get("text") or "").strip()
+
+
+def write_skill_briefs(handle: str, result: dict[str, Any]) -> int:
+    """Write one skill-creator-ready brief per framework, grounded in real tweets.
+
+    This is the deterministic bridge from analysis to skill creation: it does the
+    assembly (pulling each framework's evidence tweets, formatting the prompt) so
+    handing a framework to the skill-creator skill is a single step. It does NOT
+    create skills — choosing which frameworks are worth it, and running the eval
+    loop, stays a human judgment call.
+    """
+    handle = handle.lstrip("@").lower()
+    frameworks = result.get("frameworks") or []
+    if not frameworks:
+        return 0
+    out_dir = AUTHORS_DIR / handle / "skill-briefs"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    for fw in frameworks:
+        slug = _slugify(fw.get("name", ""))
+        evidence_lines = []
+        for tid in fw.get("evidence_tweet_ids") or []:
+            text = _tweet_text(handle, tid)
+            if text:
+                evidence_lines.append(f'- [{tid}] "{text}"')
+            else:
+                evidence_lines.append(f"- [{tid}] _(not found in local corpus)_")
+        evidence = "\n".join(evidence_lines) or "_(no evidence tweets cited)_"
+
+        brief = f"""# Skill brief: {fw.get('name', slug)}
+
+_Auto-generated from @{handle}'s frameworks ({fw.get('confidence', '?')} confidence).
+Hand this file to the **skill-creator** skill to build the skill. Review first —
+not every framework should become a skill (worldviews/theses usually shouldn't)._
+
+## Core idea
+{fw.get('description', '').strip()}
+
+## How to apply
+{fw.get('how_to_apply', '').strip()}
+
+## Grounding — @{handle}'s actual words
+{evidence}
+
+## Suggested skill name
+`{slug}`
+"""
+        (out_dir / f"{slug}.md").write_text(brief)
+
+    return len(frameworks)
+
+
 def analyze_author(handle: str) -> dict[str, Any] | None:
     """Extract frameworks for one handle. Returns the result, or None if skipped."""
     try:
@@ -171,8 +239,9 @@ def analyze_author(handle: str) -> dict[str, Any] | None:
     out_dir = AUTHORS_DIR / handle
     (out_dir / "_frameworks.json").write_text(json.dumps(result, indent=2, ensure_ascii=False))
     (out_dir / "_analysis.md").write_text(_analysis_markdown(handle, result))
+    briefs = write_skill_briefs(handle, result)
     console.print(
         f"  [green]✓[/green] {len(result.get('frameworks', []))} framework(s) "
-        f"→ {handle}/_analysis.md"
+        f"→ {handle}/_analysis.md; {briefs} skill brief(s) → {handle}/skill-briefs/"
     )
     return result

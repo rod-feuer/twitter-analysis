@@ -64,7 +64,9 @@ def _cmd_sync(full: bool, categorize: bool) -> int:
     return 0
 
 
-def _cmd_fetch_authors(handles: list[str], full: bool, max_tweets: int | None) -> int:
+def _cmd_fetch_authors(
+    handles: list[str], full: bool, max_tweets: int | None, analyze: bool = False
+) -> int:
     access_token, _ = get_access_token()
 
     resolved = resolve_usernames(access_token, handles)
@@ -105,6 +107,10 @@ def _cmd_fetch_authors(handles: list[str], full: bool, max_tweets: int | None) -
         f"\n[bold]Done.[/bold] Fetched {grand_total} tweet(s) across "
         f"{len(resolved)} author(s). Estimated cost: ${grand_total * 0.001:.3f}"
     )
+
+    if analyze:
+        console.print("\n[bold]Analyzing[/bold] fetched author(s)...")
+        return _cmd_analyze_authors(handles=list(resolved.keys()), stitch_only=False)
     return 0
 
 
@@ -151,6 +157,10 @@ def cli() -> int:
         "--max", type=int, default=None, dest="max_tweets",
         help="Cap tweets pulled per author (default: up to the X depth wall, ~800 on this tier)",
     )
+    authors.add_argument(
+        "--analyze", action="store_true",
+        help="After fetching, run analyze-authors (stitch threads, extract frameworks, write skill briefs)",
+    )
 
     analyze = sub.add_parser(
         "analyze-authors",
@@ -181,7 +191,8 @@ def cli() -> int:
     if args.cmd == "fetch-authors":
         try:
             return _cmd_fetch_authors(
-                handles=args.handles, full=args.full, max_tweets=args.max_tweets
+                handles=args.handles, full=args.full, max_tweets=args.max_tweets,
+                analyze=args.analyze,
             )
         except Exception as exc:  # noqa: BLE001
             console.print(f"[red]Error:[/red] {exc}")

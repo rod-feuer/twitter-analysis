@@ -26,15 +26,17 @@ CLI (entry point `twitter_analysis.main:cli`):
 - `twitter-analysis categorize` — classify unlabeled bookmarks (idempotent).
 - `twitter-analysis fetch-authors @a @b` — fetch authored tweets (RTs excluded,
   replies kept) per handle into `authors/<handle>/`; incremental, `--full`/`--max N`.
-- `twitter-analysis analyze-authors @a @b` — stitch self-reply threads, then
-  extract recurring frameworks via Claude (`--stitch-only` skips the LLM step).
+  Add `--analyze` to chain straight into analyze-authors (the full pull→skill-briefs flow).
+- `twitter-analysis analyze-authors @a @b` — stitch self-reply threads, extract
+  recurring frameworks via Claude, then write one skill-creator brief per framework
+  to `authors/<handle>/skill-briefs/` (`--stitch-only` skips the LLM step).
 
 ## Architecture
 
 - `src/twitter_analysis/auth.py` — OAuth2 + refresh-token rotation (writes the new token back to `.env` before anything else).
 - `fetch.py` — X API pull: `fetch_bookmarks`, plus `fetch_user_tweets`/`resolve_usernames` for author timelines. `render.py` — JSON → Markdown (handles the under-documented `article` shape, falls back to raw dump).
 - `categorize.py` — 10-category taxonomy (A–J) classification via Haiku 4.5; taxonomy derived from `analysis/bookmarks-report.md`.
-- `threads.py` — deterministic (no-LLM) stitching of an author's self-reply chains into threads. `analyze.py` — extracts recurring frameworks per author via Claude (Sonnet 4.6) → `_frameworks.json` + `_analysis.md`, intended as skill-creator input.
+- `threads.py` — deterministic (no-LLM) stitching of an author's self-reply chains into threads. `analyze.py` — extracts recurring frameworks per author via Claude (Sonnet 4.6) → `_frameworks.json` + `_analysis.md`, then deterministically writes per-framework skill-creator briefs (core idea + how-to-apply + the real evidence tweets pulled from the JSON) to `skill-briefs/`. Choosing which briefs become skills, and the eval loop, stay human/skill-creator's job.
 - `state.py` — persists the highest bookmark ID (`last_seen_id`) and per-author cursors (`authors.{user_id}`) to `state.json` for incremental sync.
 - `main.py` — CLI wiring. `scripts/authorize.py` — standalone auth helper.
 
@@ -46,6 +48,7 @@ CLI (entry point `twitter_analysis.main:cli`):
 - `authors/<handle>/<tweet_id>.{json,md}` — that author's tweets (same record shape)
 - `authors/<handle>/threads/<root_id>.md` — stitched multi-tweet threads
 - `authors/<handle>/_frameworks.json` + `_analysis.md` — extracted frameworks
+- `authors/<handle>/skill-briefs/<slug>.md` — per-framework skill-creator briefs
 
 ## Working conventions & gotchas
 
