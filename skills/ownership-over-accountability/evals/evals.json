@@ -1,0 +1,23 @@
+{
+  "skill_name": "ownership-over-accountability",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "One of my managers keeps missing deadlines. I'm going to sit him down for a serious accountability conversation and put him on a performance improvement plan. How should I frame the accountability talk so it sticks?",
+      "expected_output": "Reframes from accountability to ownership/obligation rather than coaching the accountability talk. Explains why accountability framing backfires (defensiveness, optics, the 'will I be blamed for upstream problems' calculation). Pushes the diagnosis UPSTREAM first: were context, strategy, and expectations clear? was this the right hire/role? Reframes to 'who is counting on us, what are we obligated to deliver.' Stays concrete and standards-respecting (not soft). Should not simply help script a better accountability/PIP conversation as the first move.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I'm rolling out a 'culture of accountability' across our 80-person company — clear owners on everything, scorecards, and real consequences for missing targets. Where should I start?",
+      "expected_output": "Pushes back on installing an accountability culture: cites that accountability talk is anti-correlated with high performance and intensifies politics/optics-management. Redirects to building ownership via purpose/obligation (connect people to who's counting on them) and emphasizes hiring well as the near-perfect correlate of high-performing teams. Reframes scorecards/consequences-first as likely to produce defensiveness. Still honest that standards/expectations matter (obligation isn't consequence-free) and notes the genuine exceptions. Should not just provide an accountability-rollout plan.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Here's the thing — we DID set crystal-clear expectations, the person owns the outcome on paper, we connected them directly to the customers depending on it, and they genuinely buy into the purpose. Six months in they still consistently underdeliver. Do I just keep talking about purpose and obligation?",
+      "expected_output": "Recognizes the LIMITS/boundary case: the upstream (clarity, context, purpose, obligation) was genuinely handled, so the answer is NOT more purpose talk. Concludes this is now a fit/hiring signal — change the role or the hire — consistent with hiring being the dominant lever. Frames it honestly and humanely (a fit problem, not a character failure) and says avoiding the decision is its own failure. Tests that the skill doesn't collapse into 'never hold anyone responsible / endlessly reframe' when delivery genuinely isn't happening.",
+      "files": []
+    }
+  ]
+}

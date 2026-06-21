@@ -1,0 +1,23 @@
+{
+  "skill_name": "bias-to-impact",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "My team is too slow and deliberate — they analyze everything to death. I want to instill a strong 'bias to action' culture: ship fast, iterate, don't wait for perfect. How should I roll that out to the team?",
+      "expected_output": "Reframes 'bias to action' to 'bias to impact' rather than helping install it. Argues action optimizes for motion while impact optimizes for outcome, and the counterintuitive point that thinking/impact-focused teams are often FASTER (less rework). Reframes the 'too slow' complaint as likely a competence/clarity problem, not a pace problem — and warns that 'act faster' makes a clarity problem worse. Gives an impact-oriented rollout (name the outcome + most direct causal path, demand the causal case for actions, measure outcomes not activity). Should NOT simply provide a bias-to-action playbook. Should also avoid flipping into 'deliberate more' / analysis paralysis.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "We're under deadline pressure this sprint. My instinct is to just build the obvious first version of this feature now and fix it later — classic bias to action. Gut check me before I tell the team to start building.",
+      "expected_output": "Applies the bias-to-impact lens: asks what actual impact the feature is for and whether 'build the obvious version now' is the most direct causal path to it, or whether it branches into rework/low quality. Challenges the causal logic ('why will this version produce the outcome?'). Distinguishes smart fast experimentation (legit) from firing-before-aiming (the trap). May well endorse acting IF the causal case is sound and it's cheap/reversible — but pushes for the aim-before-fire check first rather than rubber-stamping 'just build it.'",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Embarrassing one: my team has been debating the color and label of a single onboarding button for almost two weeks. It's trivially A/B-testable and fully reversible. People keep asking for more analysis. What should I do?",
+      "expected_output": "Recognizes this is the LIMITS case — here the most direct causal path to impact is to just ship the cheap reversible test NOW, and endless deliberation is itself the failure of impact thinking. Does NOT counsel more analysis. Frames acting fast as fully consistent with bias-to-impact (experimentation is the direct path to the outcome when you can't know without data), and may explicitly note that 'aim before fire' does not mean deliberate forever on low-stakes reversible decisions. Tests that the skill is not dogmatically anti-action.",
+      "files": []
+    }
+  ]
+}

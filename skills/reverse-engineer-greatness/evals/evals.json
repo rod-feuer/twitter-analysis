@@ -1,0 +1,23 @@
+{
+  "skill_name": "reverse-engineer-greatness",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "There's a founder I follow, @lennysan, whose product launches always seem to nail the positioning — people instantly get what the product is for. I want to actually get good at that myself, not just admire it. How do I learn from how he does it?",
+      "expected_output": "Treats this as reconstructing a process, not copying outputs. Asks to (or explains how to) gather signals of his actual method (past launches, his writing on positioning, the sequence he follows). Pins the specific greatness (positioning clarity), works to extract transferable decisions/principles with the WHY, separates the imitable method from the idiosyncratic (audience/talent), and ends with a concrete first experiment the user can run on their own product. Should not just hand over generic positioning tips divorced from studying the exemplar.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I found this writeup by someone whose landing pages convert incredibly well (it's saved at dana-workflow-writeup.md). Can you break down how she actually works so I can apply it? I build SaaS pricing pages.",
+      "expected_output": "Reads the file and reconstructs the underlying process, not just restating it. Distinguishes transferable decisions (start from real customer language in tickets; one page = one decision; structure as objections answered in frequency order; ship ugly and watch session recordings; kill the precious line) from the idiosyncratic detail she explicitly flags as not the point (plain HTML single file). States the WHY behind the key moves so they transfer to the user's SaaS pricing-page context, and ends with a concrete first experiment. Bonus: notes the convergence is on customer-language-driven, objection-ordered, evidence-over-guessing.",
+      "files": ["files/dana-workflow-writeup.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "I love MrBeast's thumbnails. Can you just make me 5 thumbnails that copy his exact style — same bright colors, shocked face, big arrows — for my cooking channel?",
+      "expected_output": "Recognizes the copy trap: cloning surface artifacts is the brittle path. Without being preachy or refusing outright, redirects to the process level — names the transferable decisions behind why those thumbnails work (one instantly legible emotional beat, ruthless removal of anything that isn't the hook, testing curiosity gap) and offers to apply THOSE principles to the user's cooking channel in its own voice, rather than producing a derivative clone of someone's identity. May still help, but reframes from 'copy his exact style' to 'extract what makes them work and make it yours.'",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "skill_name": "team-first-ai-adoption",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "We rolled out ChatGPT Enterprise to all 120 employees about three months ago. Usage is all over the place — a few power users, most people barely touch it, and leadership is asking why we're not seeing the ROI we expected. What should we actually do?",
+      "expected_output": "Diagnoses the real problem: access isn't enough; usage is private and disposable so nothing compounds, and they're measuring seats/logins instead of whether the org is getting smarter. Prescribes the team-first move: put AI where the work happens — a bot in shared PUBLIC channels — so reasoning accumulates as institutional memory; encourage visible pair-prompting so people learn by watching; design for the harder shared-workplace context; and measure team-level outcomes (decision speed, reuse) rather than license adoption. Reframes from individual tooling to collective, shared usage.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I'm the CEO of a ~40-person company. I want to personally get really fluent with AI first — build my own productivity system — and then figure out how to roll it out to the team once I've mastered it. Where should I start for my own setup?",
+      "expected_output": "Respectfully reframes the exec-first instinct rather than just answering the personal-setup question. Explains why team-first beats personal-productivity-first: team usage in shared spaces generates the accumulated context that actually makes leadership's AI useful, and starting personally only yields one more productive person. Recommends putting AI into shared team channels and starting team-first (it can be done quietly/internally if competitive secrecy is a concern). May still acknowledge the CEO's own usage, but the core recommendation should pivot to the team. Should NOT simply provide a personal productivity stack as if that were the right starting point.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I'm a solo founder — it's literally just me, no employees yet. Everyone keeps telling me to 'get AI into my team's workflow' but I don't have a team. How should I be adopting AI for now?",
+      "expected_output": "Recognizes the boundary: with no team, the shared-channel / team-first playbook doesn't directly apply, and says so honestly instead of forcing it. Adapts the transferable principle — make AI's context persistent and reusable rather than disposable (durable memory, saved workflows/skills) so today's reasoning is available tomorrow. Notes that the full team-first playbook (shared public channels, pair-prompting, context bubbling up) becomes the move once there are people to share context with. Does NOT cargo-cult the team-first advice onto a one-person situation.",
+      "files": []
+    }
+  ]
+}

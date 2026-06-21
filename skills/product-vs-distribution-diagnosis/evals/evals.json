@@ -1,0 +1,23 @@
+{
+  "skill_name": "product-vs-distribution-diagnosis",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Our B2B analytics product has been in market 18 months. The team is genuinely expert in this space — we've all worked in analytics for a decade. The product is honestly great; everyone who demos it is impressed. We're just not growing. I'm convinced we have a distribution problem and I want to hire a VP of Growth and start spending on paid. Does that sound right?",
+      "expected_output": "Recognizes and names the 'great product, bad distribution' bias rather than accepting the framing. Applies the expertise heuristic (expert team + thought hard + still not sure = near-certain product problem). Runs the perfect-distribution test (would impressed-demo users actually retain and spread?), and probes the gap between 'impressed at demo' and 'retains/loves it' as a product-problem signal. Likely concludes (or strongly pushes toward) a product problem before hiring a growth team, with reasoning — not a hedge. Should NOT just validate the distribution plan.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I run a niche tool for indie game composers. The ~400 people who've found it are obsessed — 70% weekly retention, they post about it unprompted, half our signups are word-of-mouth referrals. The problem is almost nobody in the space has heard of us; we have basically no reach beyond a few Discord servers. Is this a product problem or a distribution problem?",
+      "expected_output": "Correctly identifies this as a GENUINE distribution problem, not reflexively a product problem — because the key evidence the skill looks for is present: strong retention (70%) and organic word-of-mouth/referrals among those who find it. Notes that the perfect-distribution test passes (these users clearly retain and spread). Does not dogmatically force 'product problem.' May add the nuance that distribution is still partly a product question (build more organic pull) and that owning the reach problem is still on them, but the core diagnosis should be distribution. Tests that the skill discerns rather than always saying 'product problem.'",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "We did a huge Product Hunt launch and got 8,000 signups in a week — tons of traffic. But almost everyone bounces; 7-day retention is under 4% and most never complete onboarding. My cofounder says we proved we can get distribution and now we just need to do more launches like that. Thoughts?",
+      "expected_output": "Diagnoses a clear PRODUCT problem despite the abundant traffic. Uses the perfect-distribution test decisively: they effectively HAD great distribution (8,000 signups) and it didn't work — under-4% retention means more distribution pours users into a leaky bucket. Pushes back on the cofounder's 'do more launches' plan as solving the wrong problem (and wasting the next launches). Explains the remedy is fixing retention/onboarding/core value, not more reach. Clear call with reasoning.",
+      "files": []
+    }
+  ]
+}
