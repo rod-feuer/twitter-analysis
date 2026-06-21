@@ -1,7 +1,10 @@
 .env
 .venv/
 bookmarks/
+authors/
 state.json
+skills/*-workspace/
+skills/grade*.py
 __pycache__/
 *.egg-info/
 *.pyc

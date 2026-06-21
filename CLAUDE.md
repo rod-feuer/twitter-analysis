@@ -24,29 +24,40 @@ CLI (entry point `twitter_analysis.main:cli`):
 - `twitter-analysis sync` — fetch new bookmarks, render, then auto-categorize.
 - `twitter-analysis sync --no-categorize` — fetch/render only.
 - `twitter-analysis categorize` — classify unlabeled bookmarks (idempotent).
+- `twitter-analysis fetch-authors @a @b` — fetch authored tweets (RTs excluded,
+  replies kept) per handle into `authors/<handle>/`; incremental, `--full`/`--max N`.
+- `twitter-analysis analyze-authors @a @b` — stitch self-reply threads, then
+  extract recurring frameworks via Claude (`--stitch-only` skips the LLM step).
 
 ## Architecture
 
 - `src/twitter_analysis/auth.py` — OAuth2 + refresh-token rotation (writes the new token back to `.env` before anything else).
-- `fetch.py` — X API bookmark pull. `render.py` — JSON → Markdown (handles the under-documented `article` shape, falls back to raw dump).
+- `fetch.py` — X API pull: `fetch_bookmarks`, plus `fetch_user_tweets`/`resolve_usernames` for author timelines. `render.py` — JSON → Markdown (handles the under-documented `article` shape, falls back to raw dump).
 - `categorize.py` — 10-category taxonomy (A–J) classification via Haiku 4.5; taxonomy derived from `analysis/bookmarks-report.md`.
-- `state.py` — persists highest bookmark ID seen to `state.json` for incremental sync.
+- `threads.py` — deterministic (no-LLM) stitching of an author's self-reply chains into threads. `analyze.py` — extracts recurring frameworks per author via Claude (Sonnet 4.6) → `_frameworks.json` + `_analysis.md`, intended as skill-creator input.
+- `state.py` — persists the highest bookmark ID (`last_seen_id`) and per-author cursors (`authors.{user_id}`) to `state.json` for incremental sync.
 - `main.py` — CLI wiring. `scripts/authorize.py` — standalone auth helper.
 
-## Output layout (`bookmarks/`, gitignored)
+## Output layout (`bookmarks/` and `authors/`, both gitignored)
 
-- `<tweet_id>.json` — full raw record (source of truth)
-- `<tweet_id>.md` — rendered for reading / LLM use
-- `_categories.json` — `tweet_id → {category, confidence, reasoning}`
+- `bookmarks/<tweet_id>.json` — full raw record (source of truth)
+- `bookmarks/<tweet_id>.md` — rendered for reading / LLM use
+- `bookmarks/_categories.json` — `tweet_id → {category, confidence, reasoning}`
+- `authors/<handle>/<tweet_id>.{json,md}` — that author's tweets (same record shape)
+- `authors/<handle>/threads/<root_id>.md` — stitched multi-tweet threads
+- `authors/<handle>/_frameworks.json` + `_analysis.md` — extracted frameworks
 
 ## Working conventions & gotchas
 
 - **Secrets live in `.env`** (`X_CLIENT_*`, `X_REFRESH_TOKEN`, `ANTHROPIC_API_KEY`)
   — already gitignored. Never commit it or print token values. The JSON sidecar
   in `bookmarks/` always preserves the full record, so re-rendering is safe.
-- `ANTHROPIC_API_KEY` is required only for categorization; if missing, sync still
-  succeeds and categorize is skipped with a warning.
+- `ANTHROPIC_API_KEY` is required only for categorization and `analyze-authors`;
+  if missing, fetch still succeeds and the LLM step is skipped with a warning.
 - **Refresh-token rotation**: every token exchange issues a new refresh token —
   `auth.py` must persist it back to `.env` before making API calls.
-- **800-bookmark cap** is X-side; older bookmarks are unreachable.
-- `bookmarks/`, `.venv/`, and `state.json` are gitignored — local data, not source.
+- **800-bookmark cap** is X-side; older bookmarks are unreachable. Author
+  timelines hit a similar depth wall on this tier — observed **~775–800 most-recent
+  tweets per user** (not the old v1.1 3,200 archive limit). For an active account
+  that's only ~2–3 months back.
+- `bookmarks/`, `authors/`, `.venv/`, and `state.json` are gitignored — local data, not source.
