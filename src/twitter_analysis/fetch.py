@@ -121,6 +121,8 @@ def fetch_user_tweets(
     since_id: str | None = None,
     exclude: str = "retweets",
     max_tweets: int | None = None,
+    resume_token: str | None = None,
+    on_progress: "callable | None" = None,
 ) -> Iterator[dict[str, Any]]:
     """Yield a user's authored tweets newest-first.
 
@@ -130,13 +132,18 @@ def fetch_user_tweets(
     for incremental sync, at max_tweets if set, or when reachable history runs out
     (depth varies widely by author — observed ~775 to ~1766 — bounded by X's
     ~3,200 archive limit; there is no fixed ~800 tier cap).
+
+    Resumable: pass `resume_token` to continue paginating from a saved checkpoint
+    instead of from the newest tweet. After each page's tweets are yielded,
+    `on_progress(next_token)` is called (next_token is None on the final page) so
+    the caller can persist the checkpoint and avoid re-fetching on a crash.
     """
     session = requests.Session()
     session.headers.update(
         {"Authorization": f"Bearer {access_token}", "User-Agent": "twitter-analysis/0.1"}
     )
 
-    pagination_token: str | None = None
+    pagination_token: str | None = resume_token
     yielded = 0
     while True:
         params: dict[str, str] = {
@@ -165,10 +172,16 @@ def fetch_user_tweets(
             yield _attach_includes(tweet, lookup)
             yielded += 1
             if max_tweets is not None and yielded >= max_tweets:
+                if on_progress:
+                    on_progress(None)  # capped: treat as a clean stop
                 return
 
         meta = body.get("meta") or {}
         pagination_token = meta.get("next_token")
+        if on_progress:
+            # Called after this page's tweets are consumed; persists the token for
+            # the NEXT page (None when done) so a crash resumes from here.
+            on_progress(pagination_token)
         if not pagination_token:
             return
 

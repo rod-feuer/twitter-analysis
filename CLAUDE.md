@@ -7,8 +7,16 @@ Guidance for Claude Code when working in this repository.
 Pulls your X/Twitter bookmarks (including long-form **Twitter Articles**) into a
 local corpus of Markdown + JSON for re-reading and LLM analysis, then
 auto-categorizes them with Claude Haiku 4.5. Uses the official X API on the
-pay-as-you-go tier (~$0.001/bookmark; 800-bookmark API ceiling). Full setup,
-auth flow, and launchd scheduling are in [`README.md`](README.md).
+pay-as-you-go tier. Full setup, auth flow, and launchd scheduling are in
+[`README.md`](README.md).
+
+**Cost reality (don't trust the in-CLI estimate):** the printed "Rough cost" is a
+ballpark at `COST_PER_TWEET_EST` (~$0.004/tweet, in `main.py`) and is routinely
+off — observed real spend ran several times higher than a naive per-tweet figure
+(failed/retried pulls, samples, and X's actual per-request billing all add up).
+**The X developer dashboard is the only source of truth for spend.** A full author
+pull is multi-dollar; an uncapped `study`/`fetch-authors` confirms before spending
+(skip with `--yes`, bound with `--max N`).
 
 ## Setup & commands
 
