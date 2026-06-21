@@ -98,8 +98,9 @@ def fetch_user_tweets(
     Mirrors fetch_bookmarks against GET /2/users/:id/tweets. `exclude` is passed
     straight to the API ("retweets" keeps replies — the thread continuations
     where reasoning lives — while dropping pure RTs of others). Stops at since_id
-    for incremental sync, at max_tweets if set, or at the X-side depth wall
-    (~800 most-recent tweets on the current tier).
+    for incremental sync, at max_tweets if set, or when reachable history runs out
+    (depth varies widely by author — observed ~775 to ~1766 — bounded by X's
+    ~3,200 archive limit; there is no fixed ~800 tier cap).
     """
     session = requests.Session()
     session.headers.update(

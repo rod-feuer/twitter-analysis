@@ -155,7 +155,7 @@ def cli() -> int:
     )
     authors.add_argument(
         "--max", type=int, default=None, dest="max_tweets",
-        help="Cap tweets pulled per author (default: up to the X depth wall, ~800 on this tier)",
+        help="Cap tweets pulled per author (default: all reachable history; varies by author, up to X's ~3,200 archive limit)",
     )
     authors.add_argument(
         "--analyze", action="store_true",
@@ -170,7 +170,7 @@ def cli() -> int:
     study.add_argument("--full", action="store_true", help="Ignore saved cursors and refetch all")
     study.add_argument(
         "--max", type=int, default=None, dest="max_tweets",
-        help="Cap tweets pulled per author (default: up to the X depth wall, ~800 on this tier)",
+        help="Cap tweets pulled per author (default: all reachable history; varies by author, up to X's ~3,200 archive limit)",
     )
 
     analyze = sub.add_parser(

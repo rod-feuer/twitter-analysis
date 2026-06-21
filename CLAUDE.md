@@ -62,8 +62,9 @@ CLI (entry point `twitter_analysis.main:cli`):
   if missing, fetch still succeeds and the LLM step is skipped with a warning.
 - **Refresh-token rotation**: every token exchange issues a new refresh token —
   `auth.py` must persist it back to `.env` before making API calls.
-- **800-bookmark cap** is X-side; older bookmarks are unreachable. Author
-  timelines hit a similar depth wall on this tier — observed **~775–800 most-recent
-  tweets per user** (not the old v1.1 3,200 archive limit). For an active account
-  that's only ~2–3 months back.
+- **800-bookmark cap** is X-side; older bookmarks are unreachable. Author timeline
+  depth, by contrast, **varies widely per author** — observed **775 (@hnshah, ~10 weeks)
+  and 1766 (@shreyas, ~21 months)**. There is no fixed ~800 cap; reachable history runs
+  into the thousands, bounded by X's ~3,200 archive limit. How far back you get depends
+  on the author's posting volume, not a tier wall.
 - `bookmarks/`, `authors/`, `.venv/`, and `state.json` are gitignored — local data, not source.
