@@ -1,0 +1,23 @@
+{
+  "skill_name": "antithesis-principle",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I've decided we should rewrite our 4-year-old Python backend in Rust. Performance matters for us, the team is excited to learn it, and I think it'll pay off long term. I'm pretty set on this — can you help me think it through before I announce it to the team?",
+      "expected_output": "Applies the Antithesis Principle: constructs the strongest steelmanned case AGAINST the rewrite (e.g., rewrites notoriously overrun and stall feature work, the second-system effect, you lose 4 years of battle-tested edge cases, Rust hiring/ramp cost, 'performance matters' rarely means a full-rewrite is the cheapest fix, opportunity cost vs. profiling/optimizing hotspots). Evaluates it on the merits, then resolves honestly — likely qualifying or narrowing the decision (e.g., rewrite only the perf-critical hot path) rather than rubber-stamping. Does not just help build the case FOR the rewrite.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "Our new VP keeps pushing 'move fast and break things' as our engineering culture and wants to make it our official value. Everyone seems to nod along. Should we adopt it?",
+      "expected_output": "Treats the mantra as a thesis to pressure-test, not adopt wholesale. Builds the strongest antithesis (e.g., 'breaking things' is catastrophic in some domains, erodes trust/quality, the original context was early consumer software not all companies, the slogan smuggles in false binaries). Critically applies the alternatives/opportunity-cost test the skill calls for: does it work better than the alternatives, have alternatives even been considered, what's the cost. Notes the social-proof trap ('everyone nods along'). Resolves with a reasoned verdict (likely: qualify/contextualize rather than adopt as-is), not a yes/no vibe.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I want to cut our free tier entirely and force everyone onto paid plans. I'm confident it's the right move — can you just help me put together the strongest argument for it so I can sell it to the board?",
+      "expected_output": "Does NOT simply build the one-sided case for killing the free tier, even though that's literally what was asked. Reframes: offers to make the case, but first constructs the strongest steelmanned antithesis (free tier as top-of-funnel/PLG motion, word-of-mouth and network effects lost, conversion may crater, competitor switching, brand/goodwill hit) and evaluates it. The point is anti-confirmation: surface the opposing case so the board-ready argument is actually sound (or the decision gets revised). May still end with a stronger, stress-tested case — but only after genuinely testing the opposite. Tests that the skill resists being a confirmation machine.",
+      "files": []
+    }
+  ]
+}
