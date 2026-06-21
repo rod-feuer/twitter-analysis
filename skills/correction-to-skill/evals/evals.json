@@ -1,0 +1,23 @@
+{
+  "skill_name": "correction-to-skill",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Every single time I ask Claude to write our weekly investor update, it leads with a wall of metrics and buries the one risk I actually need investors to be aware of somewhere in the middle. I always end up moving the risk to the very top and trimming the metrics down to the three that matter. I'm tired of redoing this by hand every week. Can you help me turn this into something reusable?",
+      "expected_output": "Recognizes this is a recurring correction worth codifying. Recovers the underlying judgment (lead with the risk/most-decision-relevant info because investors scan for what's off; metrics are support, not the headline) rather than only the surface fix. Generalizes the trigger to the class of situations (writing investor/stakeholder updates), produces a concrete multi-step process, and outputs a skill draft in the template (name, description, when-to-use, the judgment it encodes, steps, example). Optionally offers to hand off to a skill-creation tool.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I exported a chunk of my AI chat history into ~/ai-history (a couple of markdown files). I have a feeling I keep fixing the same kinds of things over and over but I can't see the pattern. Can you dig through it and tell me what's actually worth turning into a reusable skill?",
+      "expected_output": "Reads the provided history files, identifies the repeated correction (across multiple cold-email sessions the user always cuts the generic throat-clearing intro and demands: lead with a specific observation about the recipient + the concrete pain, then one line on the product, then the ask). Treats frequency as the signal, names the hidden process/judgment, and correctly distinguishes it from the one-off pricing-headline comment which the user explicitly said they'd handle themselves (a non-candidate). Surfaces the strong candidate (ideally as a skill draft) and ranks/justifies rather than dumping every minor thing.",
+      "files": ["files/ai-history/session-march-cold-emails.md", "files/ai-history/session-april-misc.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "Yesterday Claude wrote my office address wrong in a client letter and I corrected it. Should I make a skill so it stops getting that wrong?",
+      "expected_output": "Correctly identifies that this is NOT a good skill candidate: it's a single static fact (a memory/config item), not a reusable process, and there's no evidence it recurs. Explains the distinction (skills encode how to do a class of things, not a one-off lookup) and suggests the right home for it instead (e.g. a memory/profile/config entry). Does not force a skill into existence just because asked.",
+      "files": []
+    }
+  ]
+}
