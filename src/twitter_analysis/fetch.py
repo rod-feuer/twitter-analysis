@@ -62,6 +62,35 @@ def _attach_includes(tweet: dict[str, Any], lookup: dict[str, dict[str, dict]]) 
     return out
 
 
+MAX_RETRIES = 5
+
+
+def _get_with_retry(
+    session: requests.Session, url: str, params: dict[str, str], label: str
+) -> requests.Response:
+    """GET with retry+backoff on transient failures (429 and 5xx).
+
+    Honors Retry-After when present, otherwise backs off exponentially (capped).
+    Non-retryable errors (4xx such as 401/402 CreditsDepleted) and exhausted
+    retries raise immediately — we fail loud, never silently return a short result.
+    """
+    attempts = 0
+    while True:
+        resp = session.get(url, params=params, timeout=30)
+        if resp.status_code == 429 or resp.status_code >= 500:
+            attempts += 1
+            if attempts > MAX_RETRIES:
+                raise RuntimeError(
+                    f"{label} failed after {MAX_RETRIES} retries ({resp.status_code}): {resp.text}"
+                )
+            wait = int(resp.headers.get("Retry-After", min(60, 2**attempts)))
+            time.sleep(wait)
+            continue
+        if not resp.ok:
+            raise RuntimeError(f"{label} failed ({resp.status_code}): {resp.text}")
+        return resp
+
+
 def resolve_usernames(
     access_token: str, usernames: list[str]
 ) -> dict[str, dict[str, Any]]:
@@ -124,13 +153,9 @@ def fetch_user_tweets(
         if pagination_token:
             params["pagination_token"] = pagination_token
 
-        resp = session.get(TIMELINE_URL.format(user_id=user_id), params=params, timeout=30)
-        if resp.status_code == 429:
-            retry_after = int(resp.headers.get("Retry-After", "60"))
-            time.sleep(retry_after)
-            continue
-        if not resp.ok:
-            raise RuntimeError(f"Timeline fetch failed ({resp.status_code}): {resp.text}")
+        resp = _get_with_retry(
+            session, TIMELINE_URL.format(user_id=user_id), params, "Timeline fetch"
+        )
 
         body = resp.json()
         tweets = body.get("data") or []
@@ -173,13 +198,9 @@ def fetch_bookmarks(
         if pagination_token:
             params["pagination_token"] = pagination_token
 
-        resp = session.get(BOOKMARKS_URL.format(user_id=user_id), params=params, timeout=30)
-        if resp.status_code == 429:
-            retry_after = int(resp.headers.get("Retry-After", "60"))
-            time.sleep(retry_after)
-            continue
-        if not resp.ok:
-            raise RuntimeError(f"Bookmarks fetch failed ({resp.status_code}): {resp.text}")
+        resp = _get_with_retry(
+            session, BOOKMARKS_URL.format(user_id=user_id), params, "Bookmarks fetch"
+        )
 
         body = resp.json()
         tweets = body.get("data") or []

@@ -30,6 +30,9 @@ ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
 # infrequently — use a stronger model than the bookmark classifier (Haiku).
 MODEL = "claude-sonnet-4-6"
 MAX_INPUT_CHARS = 400_000  # ~100k tokens; guards cost on full ~3,200-tweet pulls
+# A rich corpus can yield 10+ frameworks with detailed steps + evidence arrays;
+# 4k truncated the JSON mid-string on large pulls. Give generous headroom.
+MAX_OUTPUT_TOKENS = 16384
 
 console = Console()
 
@@ -229,11 +232,16 @@ def analyze_author(handle: str) -> dict[str, Any] | None:
     client = anthropic.Anthropic()
     response = client.messages.create(
         model=MODEL,
-        max_tokens=4096,
+        max_tokens=MAX_OUTPUT_TOKENS,
         system=SYSTEM_PROMPT,
         output_config={"format": {"type": "json_schema", "schema": SCHEMA}},
         messages=[{"role": "user", "content": corpus}],
     )
+    if response.stop_reason == "max_tokens":
+        raise RuntimeError(
+            f"@{handle}: extraction hit the {MAX_OUTPUT_TOKENS}-token output limit and "
+            "the JSON was truncated. Raise MAX_OUTPUT_TOKENS or narrow the input."
+        )
     result = json.loads(next(b.text for b in response.content if b.type == "text"))
 
     out_dir = AUTHORS_DIR / handle
