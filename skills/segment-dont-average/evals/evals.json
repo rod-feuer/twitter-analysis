@@ -1,0 +1,23 @@
+{
+  "skill_name": "segment-dont-average",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Our average session length is 4 minutes and our average user opens the app 3x a week. Leadership wants to set OKRs to push both averages up next quarter. How should we structure initiatives to move these numbers?",
+      "expected_output": "Pushes back on optimizing the blended averages before segmenting. Suspects the data is bimodal (a small power-user cluster + a large barely-active cluster averaging out to '3x/4min' that describes nobody). Recommends plotting the distribution / checking for bimodality first, segmenting (e.g. by quartile or by activation state), and targeting the actual segments — and warns that moving 'the average' can be gamed or driven by the wrong cluster. Surfaces that the high-engagement cluster is the real signal. Should NOT just propose initiatives to lift the average numbers.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "Our analytics show average usage of the advanced/pro features is really low across our user base, so I'm planning to cut them and simplify the product. Sound reasonable?",
+      "expected_output": "Catches the classic average-hides-bimodal trap before the irreversible decision. Asks WHICH users — a low AVERAGE very likely masks a small power-user segment that depends heavily on those features (and may be the highest-value/lowest-churn customers). Recommends segmenting usage by user type/value before cutting: plot the distribution, identify whether a critical cluster relies on the features, check revenue/retention concentration. Warns that cutting based on the average could kill the product for the segment that matters most. Should not endorse the cut on the average alone.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I get the 'don't trust averages' thing, but my board literally asks for one customer-satisfaction number each quarter and I have to put a single figure on the slide. Should I just refuse to give them an average?",
+      "expected_output": "Recognizes the LIMITS case and does NOT counsel refusing/banning the number dogmatically. Acknowledges a single headline figure is a legitimate need for a board slide/tracked KPI. The discipline: check the distribution first (is satisfaction unimodal or split?), and pair the headline number with the segment breakdown (e.g. by quartile or customer tier) so the average doesn't HIDE a bimodal reality — give the number AND the segments, not the number alone, and not nothing. Tests that the skill isn't an averages-banning tic.",
+      "files": []
+    }
+  ]
+}

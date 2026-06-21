@@ -1,0 +1,23 @@
+{
+  "skill_name": "market-vs-leader-attribution",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "We're a robotics startup selling to factories — long sales cycles, skeptical buyers, brutal competition. I want us to adopt the playbook that made Slack and Dropbox explode: the viral self-serve growth, the freemium motion, the famously fun culture. How should we roll that playbook out?",
+      "expected_output": "Separates market tailwind from leadership technique before endorsing the copy. Flags that Slack/Dropbox rode powerful currents (viral/network-effect, exploding bottom-up SaaS demand, eager self-serve buyers) that the robotics startup's hard, reluctant, high-friction market does NOT share. Warns that copying that playbook into a hard market is actively harmful, and redirects to studying leaders who won hard/competitive/commoditized markets (quality, CX, talent, sales technique). Should NOT just help roll out the freemium/viral playbook. Keeps the nuance that their market SELECTION was real genius.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I'm putting together a list of founders and companies to study deeply this year to level up as an operator. So far: the founders of Uber, Airbnb, and a couple of crypto-boom and AI-wave companies that 10x'd in two years. Is this a good study list?",
+      "expected_output": "Applies the 'swimming with or against the current?' filter to the list. Points out these are largely tailwind/category-timing winners (network effects, exploding new categories, wave-riders) — so their operational practices are unreliable signal, and the main transferable lesson is market/timing selection. Recommends rebalancing toward leaders who won genuinely hard, competitive, no-tailwind markets, where technique is real and transferable. Doesn't blanket-dismiss the famous names but reweights what to learn from them.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "My mentor keeps quoting a famous founder whose company rode an obvious once-in-a-decade wave, treating every decision that founder made as gospel. Part of me wants to just dismiss everything that founder says since they clearly got lucky with timing. Is that the right call?",
+      "expected_output": "Recognizes the LIMITS case and pushes back on the over-correction. Says do NOT blanket-dismiss the founder: market/timing selection was a real and valuable skill worth learning, and tailwind winners can still have genuine technique — it's just UNVERIFIED (the current covered for weaknesses), so treat their operational practices as unreliable-for-your-situation rather than worthless. The discipline is to discount/contextualize, not to ignore the person. Avoids both 'copy them as gospel' AND 'all success is luck, ignore them.' Tests that the skill isn't blanket-cynical.",
+      "files": []
+    }
+  ]
+}
