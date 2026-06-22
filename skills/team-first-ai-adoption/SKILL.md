@@ -21,8 +21,10 @@ description: >-
 The default way companies "adopt AI" is to buy everyone a license to a chat box and
 hope for ROI. It underdelivers, and Hiten Shah's diagnosis explains why: *"access is
 not enough."* A private chat window helps one person once, and the reasoning vanishes
-when they close the tab. The leverage isn't individual productivity — it's getting
-the **team** using AI together in **shared spaces**, where the context accumulates.
+when they close the tab. The bigger, compounding leverage is usually not individual
+productivity but getting the **team** using AI together in **shared spaces**, where the
+context accumulates — though how universally that holds depends on the organization (see
+*When team-first doesn't apply*).
 
 His sharpest version: *"The most important AI decision at work might be where it
 lives. In a separate window, it helps one person. In the channel, it can help the
@@ -33,6 +35,12 @@ becomes the best raw material for leadership and manager decisions, which is why
 starting with the team beats starting with the executive's personal productivity.
 
 This skill helps the user design an AI rollout around that principle.
+
+*A note on certainty: treat this as an **unproven hypothesis**, not a finding. The broad
+direction (team-level use beats individual-only) has partial support, but the specific
+"shared-channels-first" mechanism is not established — and a checked experiment (a one-day
+AI-vs-team task) cut against it. Direction plausible, mechanism unproven. Validate it in their
+context with the cheap test below; don't assert it.*
 
 ## When you're invoked
 
@@ -100,6 +108,26 @@ a playbook past its context. The *transferable* part still helps: make AI's cont
 skills) so today's reasoning is available tomorrow. Say plainly that the full
 team-first playbook kicks in once there are people to share context with.
 
+Readiness also matters even when there *is* a team: in organizations with low AI fluency
+or little change-management capacity, starting with a few individuals to build skill and
+confidence can be the faster on-ramp, with the team-first move following once there's
+competence to share. Team-first is the higher-leverage default, not a universal law.
+
+## Test it cheaply (it's a frontier claim — let their context decide)
+
+No published study settles this, so hand the user a low-cost, high-leverage test rather than
+insisting. Offer one shaped to their situation; the default:
+
+- **The test:** pick one active team and one recurring decision or question type. Put the AI in
+  that team's shared, public channel for ~2 weeks, with one habit: answer in the channel, not in DMs.
+- **What to watch:** how often the team reuses earlier reasoning instead of re-deriving it — a
+  prior 45-minute conversation becoming a 45-second lookup.
+- **Confirm / kill:** confirm if reuse and decision speed visibly rise versus a comparable team on
+  private/individual use; kill or revise if nothing compounds after two weeks.
+
+It's cheap (one channel, two weeks, no new tooling) and it tests the actual claim — that *shared
+context compounds* — not a proxy.
+
 ## Output
 
 Give a concrete rollout recommendation, not a lecture. Adapt to the user's situation,
@@ -117,4 +145,7 @@ but generally cover:
 
 ## What to measure
 <team-level outcomes to watch, and the vanity metric to ignore>
+
+## Test it cheaply
+<the smallest real experiment that would confirm or kill the team-first bet in their context, with a confirm/kill line>
 ```

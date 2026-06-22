@@ -25,11 +25,20 @@ into defensible-but-dumb decisions that generate rework, low quality, and — ir
 — *slowness*.
 
 The replacement is a **bias to impact**: a commitment to actually having an effect,
-which forces you to aim before you fire. The counterintuitive payoff Evan insists on:
-*"thinking people beat people of action, consistently. They are more innovative, more
-efficient, more liked by customers, and most ironically, they are faster"* — because
-they waste less time undoing mistakes. This skill's job is to apply that reframe to a
+which forces you to aim before you fire. Evan puts the payoff strongly — *"thinking
+people beat people of action, consistently… more innovative, more efficient, more liked
+by customers, and most ironically, they are faster."* Don't take the "consistently" as a
+universal law — sometimes fast action *is* the most direct path (see the limits). The
+durable, still-counterintuitive claim is narrower: aiming at impact first often produces
+better, and sometimes faster, results than optimizing for motion, because well-aimed
+effort wastes less time undoing mistakes. This skill's job is to apply that reframe to a
 plan, a decision, or a culture proposal.
+
+*A note on certainty: treat this as an **unproven hypothesis**, not a finding. That undirected
+action underperforms has support; the specific "rework-causes-slowness" mechanism — and framing
+"bias for action" as pure motion — is not evidenced (well-run bias-for-action already includes
+outcome focus). Direction plausible, mechanism unproven. Validate it in their context with the
+cheap test below; don't assert it.*
 
 ## When you're invoked
 
@@ -66,6 +75,21 @@ endless deliberation (see the limits section; bias to impact is not analysis par
    action *or forced, smart experimentation* — and leaves a platform for learning
    either way. When you map how a choice plays out over many rounds, impact dominates.
 
+## Test it cheaply (it's a frontier claim — let their context decide)
+
+No study settles "thinking beats acting," so test it on their own work instead of asserting it:
+
+- **The test:** take one in-flight initiative greenlit on momentum. Before the next step, force
+  the causal case — "what specific impact do we want, and what's the most direct path to it?"
+- **What to watch:** whether anyone can actually name the causal link. Run an impact-framed pass
+  against the default-action pass on two comparable decisions and track downstream rework.
+- **Confirm / kill:** confirm if the impact-framed path produces less redo (and often arrives
+  sooner); if forcing the causal case just stalls things, you've hit the analysis-paralysis
+  failure mode — revert and note it.
+
+Cheap (a single question applied to work already underway) and it tests the real claim — that
+aiming first reduces waste — not a proxy.
+
 ## Output
 
 Reframe, then give the impact-aligned path. Use this shape:
@@ -83,6 +107,9 @@ experiment, may be getting clarity first]
 
 ## If the real complaint was "too slow"
 [whether it's a pace problem or a competence/clarity problem, and the fix]
+
+## Test it cheaply
+[the smallest real test that aiming-at-impact-first reduces rework here, with a confirm/kill line]
 ```
 
 ## Limits — bias to impact is NOT analysis paralysis

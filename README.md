@@ -61,6 +61,32 @@ Requires `ANTHROPIC_API_KEY` in the environment. If it's missing, sync still suc
 
 Run `twitter-analysis categorize` standalone to backfill or pick up after a missed sync — it skips bookmarks already in the index.
 
+## Evaluating skills (does a skill actually work?)
+
+A "skill" is a short, reusable instruction that tells a model how to handle a class of
+problem. The question that matters is whether loading it actually *changes the model's answer* —
+a skill that doesn't move the output isn't a skill, it's decoration.
+
+[`skills/eval_skill.py`](skills/eval_skill.py) measures that directly. For each eval prompt it
+answers the question twice — once with the skill loaded, once without — and a judge model
+scores each answer against a rubric. The result is the **delta**: how far the skill moved the
+model. No grades are hardcoded; the scoring runs live.
+
+```bash
+export ANTHROPIC_API_KEY=...        # or put it in .env
+python skills/eval_skill.py --skill skills/bias-to-impact/SKILL.md --evals skills/evals/example.jsonl
+```
+
+Each eval line is `{"prompt": "...", "rubric": "what a shifted/good answer contains"}`
+(see [`skills/evals/example.jsonl`](skills/evals/example.jsonl)).
+
+The pattern worth knowing: skills that teach the model a general *disposition* ("steelman the
+other side," "reason from first principles") tend to move it ~0 — it already runs those by
+default. Skills that inject a specific, non-default *conclusion* are the ones that move it.
+Caveat: a small, single-model, single-run, judge-scored test is an illustration of the method,
+not a benchmark of record — raise the item count and run multiple trials before trusting a
+specific number.
+
 ## Scheduling daily sync via launchd
 
 Create `~/Library/LaunchAgents/com.rodfeuer.twitter-analysis.plist`:

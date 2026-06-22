@@ -18,9 +18,10 @@ description: >-
 ## The idea behind this skill
 
 "We need more accountability" is the reflexive fix for almost any performance problem.
-Evan Lapointe's claim is that it's not just weak but actively counterproductive: *"The
-correlation between having a high-accountability team and talking to your team about
-being accountable is exactly -1.0. It is perfectly anti-correlated."* The mechanism:
+Evan Lapointe's claim is that it's not just weak but actively counterproductive: the more
+a team talks about being accountable, the less accountable it actually tends to be (Evan
+states this as a perfect anti-correlation — treat that as rhetorical emphasis, not a
+measured statistic). The mechanism:
 the word *accountability* reads as a threat. The first thing a competent person does on
 hearing it is calculate *"will I be held downstream-responsible for upstream stupidity
 I had nothing to do with?"* — and the result is defensiveness, politics, and
@@ -30,10 +31,18 @@ more than accountability."*
 The thing leaders actually want — people who feel responsible and deliver — comes from
 **ownership**, which Evan roots specifically in **obligation**: *"Purpose is not a
 sense of inspiration… Purpose is a sense of obligation to others and to craft and
-quality. Revealing who is counting on them is the way."* And the one thing that *is*
-near-perfectly correlated with a high-performing team is **hiring well** (~+0.9). This
-skill reframes accountability asks into ownership/obligation and upstream diagnosis —
+quality. Revealing who is counting on them is the way."* And one of the most powerful
+levers for a high-performing team is **hiring well** — one strong lever among several
+(team processes, norms, and leadership drive a large share of performance too), not the
+sole determinant. This skill reframes accountability asks into ownership/obligation and
+upstream diagnosis —
 while staying honest that standards still matter (see limits).
+
+*A note on certainty: treat this as an **unproven hypothesis**, not a finding. The backfire half
+(accountability talk triggers defensiveness) has support; the specific claim that obligation
+*to specific people* is the superior driver of results is not isolated by evidence. Direction
+plausible, mechanism unproven. Validate it in their context with the cheap test below; don't
+assert it.*
 
 ## When you're invoked
 
@@ -64,8 +73,22 @@ accountability to obligation, and (b) push the diagnosis *upstream*, because mos
 4. **Treat persistent failure as a hiring signal, not a character verdict.** When
    context was clear, purpose was real, and someone *still* doesn't deliver, Evan's
    conclusion is to **change the hire, not escalate the accountability** — because
-   hiring is the +0.9 lever. That's a humane and accurate reframe: it's a fit problem,
+   hiring is one of the strongest levers. That's a humane and accurate reframe: it's a fit problem,
    not a willpower problem to be browbeaten.
+
+## Test it cheaply (it's a frontier claim — let their context decide)
+
+No published study settles this, so offer a near-zero-cost test rather than insisting:
+
+- **The test:** on the next real performance problem, run the upstream diagnosis + the obligation
+  reframe ("who is counting on us, what are we obligated to deliver, did we set this up to
+  succeed?") with one person or team — instead of an accountability conversation.
+- **What to watch:** whether delivery improves *without* the defensiveness, politics, and
+  optics-management an accountability framing usually triggers.
+- **Confirm / kill:** confirm if the obligation framing moves the result where prior accountability
+  talk stalled; if it changes nothing, the upstream gap or the hire is the real issue — itself the finding.
+
+Cost is essentially zero — a framing change in one conversation — and it tests the mechanism directly.
 
 ## Output
 
@@ -85,6 +108,9 @@ deliver, and did we set this up to succeed"]
 
 ## If upstream was genuinely handled
 [then it's a fit/hiring signal — change the role/hire, stated honestly and humanely]
+
+## Test it cheaply
+[the smallest real test of the obligation reframe in their context, with a confirm/kill line]
 ```
 
 ## Limits — ownership is not "no standards"

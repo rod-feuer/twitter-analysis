@@ -5,6 +5,9 @@ authors/
 state.json
 skills/*-workspace/
 skills/grade*.py
+skills/run_*.py
+skills/*-results.json
+skills/truth-axis-calibration.md
 __pycache__/
 *.egg-info/
 *.pyc
