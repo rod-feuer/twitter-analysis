@@ -55,7 +55,7 @@ State (highest bookmark ID seen) is persisted to `state.json` so incremental run
 
 ## Auto-categorization
 
-After each sync, new bookmarks are classified against a fixed 10-category taxonomy (A–J, defined in [`src/twitter_analysis/categorize.py`](src/twitter_analysis/categorize.py) and derived from [`analysis/bookmarks-report.md`](analysis/bookmarks-report.md)) using Claude Haiku 4.5. Labels go to `bookmarks/_categories.json`.
+After each sync, new bookmarks are classified against a fixed 10-category taxonomy (A–J, defined in [`src/twitter_analysis/categorize.py`](src/twitter_analysis/categorize.py)) using Claude Haiku 4.5. Labels go to `bookmarks/_categories.json`.
 
 Requires `ANTHROPIC_API_KEY` in the environment. If it's missing, sync still succeeds and categorization is skipped with a warning. Cost: ~$0.0008 per bookmark (~$0.08 for a full 99-item backfill, cents/day after that).
 

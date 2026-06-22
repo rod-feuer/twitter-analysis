@@ -8,6 +8,8 @@ skills/grade*.py
 skills/run_*.py
 skills/*-results.json
 skills/truth-axis-calibration.md
+analysis/
+skills/*/evals/files/
 __pycache__/
 *.egg-info/
 *.pyc
