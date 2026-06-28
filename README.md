@@ -87,6 +87,30 @@ Caveat: a small, single-model, single-run, judge-scored test is an illustration 
 not a benchmark of record — raise the item count and run multiple trials before trusting a
 specific number.
 
+## Causal rigor — nudge and hook
+
+The content this repo produces (skill briefs, analysis, published posts) makes causal claims.
+Two mechanisms keep those claims honest:
+
+**Nudge — Rule 17 in `claude-projects/CLAUDE.md`**
+On any causal claim (yours or Claude's), the rule requires naming the counterfactual, the top
+confounder, and whether the claim is *identified* or only *consistent-with* the evidence before
+agreeing or moving on. Treats confidence as a flag, not evidence. "Well-identified" is a valid
+verdict — the goal is calibration, not manufactured doubt. Covers this repo hierarchically.
+
+**Hook — `.claude/hooks/causal-check.sh`**
+A Stop hook that fires automatically when Claude's final response contains causal-attribution
+language (`caused`, `drove`, `led to`, `resulted in`, etc.). Re-injects a forced second pass:
+counterfactual → top confounder → identified-vs-consistent verdict. Loop-guarded and silent when
+nothing load-bearing matches — "Causal check: clean" is an expected, valid outcome.
+
+Wired into `.claude/settings.json` so it runs in any Claude Code session in this repo. To install
+machine-wide instead, copy the hook to `~/.claude/hooks/` and add the Stop block to
+`~/.claude/settings.json`.
+
+Tuning: edit the `pattern=` line in the script to tighten or loosen triggers. Disable: remove
+the Stop block from `.claude/settings.json`.
+
 ## Scheduling daily sync via launchd
 
 Create `~/Library/LaunchAgents/com.rodfeuer.twitter-analysis.plist`:
