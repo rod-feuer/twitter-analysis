@@ -88,19 +88,23 @@ def main():
     ap = argparse.ArgumentParser(description="Measure whether a skill changes the model's answer.")
     ap.add_argument("--skill", required=True, help="path to a SKILL.md (the skill under test)")
     ap.add_argument("--evals", required=True, help="JSONL of {prompt, rubric} items")
-    ap.add_argument("--model", default="claude-sonnet-4-6", help="model under test + judge")
+    ap.add_argument("--model", default="claude-sonnet-4-6", help="model under test (answerer)")
+    ap.add_argument("--judge-model", default=None,
+                    help="judge/scorer model; defaults to --model. Set to a different model to "
+                         "remove the shared-model confound (answerer and judge are the same).")
     args = ap.parse_args()
+    judge_model = args.judge_model or args.model
 
     skill_text = Path(args.skill).read_text()
     items = [json.loads(l) for l in Path(args.evals).read_text().splitlines() if l.strip()]
 
-    print(f"skill={args.skill}  model={args.model}  items={len(items)}\n")
+    print(f"skill={args.skill}  answerer={args.model}  judge={judge_model}  items={len(items)}\n")
     deltas = []
     for i, it in enumerate(items):
         base = answer(it["prompt"], args.model)
         withskill = answer(it["prompt"], args.model, skill=skill_text)
-        sb = score(base, it["rubric"], args.model)
-        sw = score(withskill, it["rubric"], args.model)
+        sb = score(base, it["rubric"], judge_model)
+        sw = score(withskill, it["rubric"], judge_model)
         d = round(sw - sb, 3)
         deltas.append(d)
         print(f"  item {i+1}: baseline {sb:.2f} -> with-skill {sw:.2f}   delta {d:+.2f}")
