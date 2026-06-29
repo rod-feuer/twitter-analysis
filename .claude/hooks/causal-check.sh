@@ -34,7 +34,10 @@ reason='Causal-claim check (automatic second pass). Your last response asserts a
 2. Confounder - the single most plausible alternative explanation you have not ruled out.
 3. Verdict - IDENTIFIED, or only CONSISTENT-WITH the evidence?
 Then: if the audit changes the claim, correct it; if it survives, say so in one line. If the causal language was incidental and nothing rides on it, reply exactly: "Causal check: clean." Returning clean is a valid, expected outcome - do NOT manufacture doubt to perform rigor.
-Finally, if you audited a real claim, end the reply with a clean, self-contained "Bottom line:" - 2 to 4 sentences (or tight bullets) giving the corrected takeaway a reader could act on WITHOUT reading the audit mechanics. Skip the summary only if you returned "clean."'
+Finally, if you audited a real claim, close with up to two sections:
+- "Bottom line:" - 2-3 sentences, the corrected takeaway someone could act on WITHOUT reading the audit mechanics (the calibrated belief, not the steps).
+- "Concrete recommendation:" - tight bullets naming the specific next step(s). Include this ONLY when real, actionable steps exist; omit it entirely for purely analytical audits. Do not manufacture steps to fill it.
+Skip both only if you returned "Causal check: clean."'
 
 jq -n --arg r "$reason" '{decision:"block", reason:$r}'
 exit 0
